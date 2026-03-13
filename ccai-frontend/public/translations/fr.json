@@ -1,0 +1,17 @@
+{
+  "nav": {
+    "verify": "Vérifier",
+    "dashboard": "Tableau de Bord",
+    "methodology": "Méthodologie",
+    "appeals": "Appels",
+    "registry": "Registre"
+  },
+  "hero": {
+    "badge": "Évaluation d'Authenticité Gouvernementale",
+    "title_start": "Vérifiez avant de ",
+    "title_highlight": "Faire Confiance.",
+    "subtitle": "Protégez-vous contre la désinformation et l'hameçonnage. CCAI fournit une vérification d'IA transparente...",
+    "btn_verify": "Vérifier un Message",
+    "btn_dashboard": "Voir la Transparence"
+  }
+}

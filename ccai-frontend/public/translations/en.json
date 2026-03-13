@@ -1,0 +1,17 @@
+{
+  "nav": {
+    "verify": "Verify",
+    "dashboard": "Dashboard",
+    "methodology": "Methodology",
+    "appeals": "Appeals",
+    "registry": "Registry"
+  },
+  "hero": {
+    "badge": "Government Grade Authenticity Scoring",
+    "title_start": "Verify Before You ",
+    "title_highlight": "Trust.",
+    "subtitle": "Protect yourself from misinformation and phishing. CCAI provides transparent, explainable AI verification for official government communications via SMS, Email, and Web.",
+    "btn_verify": "Verify a Message",
+    "btn_dashboard": "View Transparency"
+  }
+}

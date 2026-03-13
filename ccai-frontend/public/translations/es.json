@@ -1,0 +1,17 @@
+{
+  "nav": {
+    "verify": "Verify",
+    "dashboard": "Dashboard",
+    "methodology": "Methodology",
+    "appeals": "Appeals",
+    "registry": "Registry"
+  },
+  "hero": {
+    "badge": "Autenticación de Grado Gubernamental",
+    "title_start": "Verifica Antes de ",
+    "title_highlight": "Confiar.",
+    "subtitle": "Protégete de la desinformación...",
+    "btn_verify": "Verificar un Mensaje",
+    "btn_dashboard": "Ver Transparencia"
+  }
+}

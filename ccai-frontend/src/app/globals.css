@@ -1,0 +1,60 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #0f172a;
+  --brand-navy: #0f172a;
+  --brand-navy-light: #1e293b;
+  --brand-accent: #3b82f6;
+  --brand-glass: rgba(255, 255, 255, 0.7);
+  --green-verify: #10b981;
+  --red-alert: #ef4444;
+  --yellow-warn: #f59e0b;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-brand-navy: var(--brand-navy);
+  --color-brand-navy-light: var(--brand-navy-light);
+  --color-brand-accent: var(--brand-accent);
+  --color-brand-glass: var(--brand-glass);
+  --color-green-verify: var(--green-verify);
+  --color-red-alert: var(--red-alert);
+  --color-yellow-warn: var(--yellow-warn);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #020617;
+    --foreground: #f8fafc;
+    --brand-navy: #020617;
+    --brand-navy-light: #0f172a;
+    --brand-glass: rgba(15, 23, 42, 0.7);
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: "Avenir Next", "Segoe UI", sans-serif;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+
+/* Glassmorphism Utilities */
+.glass-panel {
+  background: var(--brand-glass);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
