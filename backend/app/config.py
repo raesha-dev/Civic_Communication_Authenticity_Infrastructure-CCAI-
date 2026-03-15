@@ -1,7 +1,19 @@
 import os
-from dotenv import load_dotenv
+
+try:
+    from dotenv import load_dotenv
+except ModuleNotFoundError:
+    def load_dotenv():
+        return None
 
 load_dotenv()
+
+
+def _parse_allowed_origins(value: str | None):
+    if not value:
+        return ["*"]
+    origins = [item.strip() for item in value.split(",") if item.strip()]
+    return origins or ["*"]
 
 class Config:
     MOCK_MODE = os.getenv("MOCK_MODE", "false").lower() == "true"
@@ -38,5 +50,7 @@ class Config:
     S3_BUCKET_EMBEDDINGS = os.getenv("S3_BUCKET_EMBEDDINGS", "ccai-embeddings")
     S3_BUCKET_LOGS = os.getenv("S3_BUCKET_LOGS", "ccai-audit-logs")
 
-    JWT_SECRET = os.getenv("JWT_SECRET", "super-secret-key-for-mvp")
+    JWT_SECRET = os.getenv("JWT_SECRET", "")
+    CORS_ALLOWED_ORIGINS = _parse_allowed_origins(os.getenv("CORS_ALLOWED_ORIGINS", "*"))
+    MAX_REQUEST_BYTES = int(os.getenv("MAX_REQUEST_BYTES", str(1024 * 1024)))
     REQUEST_TIMEOUT_SECONDS = float(os.getenv("REQUEST_TIMEOUT_SECONDS", "4.5"))

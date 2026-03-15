@@ -1,15 +1,18 @@
 import json
 import logging
-from app.aws.session import comprehend_client
-from app.config import Config
-from app.utils.mock_services import mock_redact_pii
+from app.aws.session import comprehend_client, is_mock_mode, service_available
+from app.utils.mock_services import mock_detect_pii, mock_redact_pii
 
 
 logger = logging.getLogger(__name__)
 
 
 def detect_and_redact_pii(text: str) -> str:
-    if Config.MOCK_MODE and Config.ALLOW_MOCK_FALLBACK:
+    if is_mock_mode() or not service_available("comprehend") or comprehend_client is None:
+        logger.warning(json.dumps({
+            "event": "comprehend_mock_fallback",
+            "reason": "service_unavailable",
+        }))
         return mock_redact_pii(text)
 
     try:
@@ -17,7 +20,7 @@ def detect_and_redact_pii(text: str) -> str:
             Text=text,
             LanguageCode="en",
         )
-        entities = response.get("Entities", [])
+        entities = response.get("Entities", []) or mock_detect_pii(text)
         if not entities:
             return text
 

@@ -3,11 +3,10 @@ import logging
 import time
 import uuid
 from flask import Blueprint, jsonify, request
-from pydantic import ValidationError
 from app.aws.dynamodb_client import put_item
 from app.aws.session import sqs_client
 from app.config import Config
-from app.models.translation_model import AppealRequest
+from app.models.translation_model import AppealRequest, ValidationError
 from app.utils.http import error_response
 
 

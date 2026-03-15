@@ -2,19 +2,46 @@ import json
 import logging
 import time
 from flask import Flask, g, request
-from flask_cors import CORS
-from flask_compress import Compress
+from werkzeug.exceptions import BadRequest, RequestEntityTooLarge
 from app.config import Config
 from app.security.rate_limit import limiter
 from app.utils.http import error_response
+
+try:
+    from flask_cors import CORS
+except ModuleNotFoundError:
+    def CORS(_app, **_kwargs):
+        return None
+
+try:
+    from flask_compress import Compress
+except ModuleNotFoundError:
+    class Compress:  # type: ignore[override]
+        def __init__(self, app=None):
+            if app is not None:
+                self.init_app(app)
+
+        def init_app(self, app):
+            return app
+
+
+def _cors_origin_for_request():
+    allowed_origins = Config.CORS_ALLOWED_ORIGINS
+    request_origin = request.headers.get("Origin")
+    if "*" in allowed_origins:
+        return "*"
+    if request_origin and request_origin in allowed_origins:
+        return request_origin
+    return allowed_origins[0] if allowed_origins else "*"
 
 
 def create_app():
     app = Flask(__name__)
     app.config.from_object(Config)
+    app.config["MAX_CONTENT_LENGTH"] = Config.MAX_REQUEST_BYTES
     app.url_map.strict_slashes = False
 
-    CORS(app, resources={r"/*": {"origins": "*"}})
+    CORS(app, resources={r"/*": {"origins": Config.CORS_ALLOWED_ORIGINS}})
     Compress(app)
     limiter.init_app(app)
 
@@ -51,11 +78,23 @@ def create_app():
             "request_id": request.headers.get("X-Request-Id"),
         }))
         response.headers["Cache-Control"] = "no-store"
+        response.headers.setdefault("Access-Control-Allow-Origin", _cors_origin_for_request())
+        response.headers.setdefault("Vary", "Origin")
+        response.headers.setdefault("Access-Control-Allow-Headers", "Content-Type, Authorization, X-Request-Id")
+        response.headers.setdefault("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
         return response
 
     @app.errorhandler(429)
     def ratelimit_handler(_error):
         return error_response("RATE_LIMIT_EXCEEDED", "Too many requests. Please try again later.", 429)
+
+    @app.errorhandler(BadRequest)
+    def bad_request(_error):
+        return error_response("BAD_REQUEST", "Malformed or invalid request payload", 400)
+
+    @app.errorhandler(RequestEntityTooLarge)
+    def request_too_large(_error):
+        return error_response("PAYLOAD_TOO_LARGE", "Request payload exceeds the allowed size", 413)
 
     @app.errorhandler(404)
     def not_found(_error):

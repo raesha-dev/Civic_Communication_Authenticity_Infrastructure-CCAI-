@@ -1,17 +1,22 @@
 import json
 import logging
-from app.aws.session import bedrock_client
+from app.aws.session import bedrock_client, is_mock_mode, service_available
 from app.config import Config
 from app.utils.embedding_cache import get_cached_embedding, set_cached_embedding
-from app.utils.mock_services import mock_get_embedding, mock_translate
+from app.utils.mock_services import mock_generate_embedding, mock_translate
 
 
 logger = logging.getLogger(__name__)
 
 
 def get_embedding(text: str) -> list:
-    if Config.MOCK_MODE and Config.ALLOW_MOCK_FALLBACK:
-        return mock_get_embedding(text)
+    if is_mock_mode() or not service_available("bedrock") or bedrock_client is None:
+        logger.warning(json.dumps({
+            "event": "bedrock_mock_fallback",
+            "operation": "embedding",
+            "reason": "service_unavailable",
+        }))
+        return mock_generate_embedding(text)
 
     cached = get_cached_embedding(text)
     if cached is not None:
@@ -36,11 +41,16 @@ def get_embedding(text: str) -> list:
             "model_id": Config.BEDROCK_EMBED_MODEL_ID,
             "error": str(error),
         }))
-        return mock_get_embedding(text)
+        return mock_generate_embedding(text)
 
 
 def translate_text(text: str, target_lang: str) -> str:
-    if Config.MOCK_MODE and Config.ALLOW_MOCK_FALLBACK:
+    if is_mock_mode() or not service_available("bedrock") or bedrock_client is None:
+        logger.warning(json.dumps({
+            "event": "bedrock_mock_fallback",
+            "operation": "translate",
+            "reason": "service_unavailable",
+        }))
         return mock_translate(text, target_lang)
 
     try:

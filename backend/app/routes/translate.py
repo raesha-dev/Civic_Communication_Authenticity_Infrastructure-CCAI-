@@ -1,6 +1,5 @@
 from flask import Blueprint, request, jsonify
-from pydantic import ValidationError
-from app.models.translation_model import TranslationRequest
+from app.models.translation_model import TranslationRequest, ValidationError
 from app.services.translation_service import translate_verified_message
 from app.aws.dynamodb_client import get_item
 from app.utils.http import error_response

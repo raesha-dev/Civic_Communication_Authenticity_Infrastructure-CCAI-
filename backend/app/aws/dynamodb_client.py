@@ -1,7 +1,7 @@
 import json
 import logging
 from boto3.dynamodb.conditions import Key
-from app.aws.session import dynamodb, dynamodb_client
+from app.aws.session import dynamodb, dynamodb_client, is_mock_mode, service_available
 from app.config import Config
 from app.utils.mock_services import mock_registry_lookup
 from app.utils.serialization import to_json_compatible
@@ -28,6 +28,13 @@ def _table_name(logical_name: str) -> str:
 
 
 def get_table(table_name: str):
+    if not service_available("dynamodb") or dynamodb is None:
+        logger.warning(json.dumps({
+            "event": "dynamodb_mock_fallback",
+            "table": _table_name(table_name),
+            "reason": "service_unavailable",
+        }))
+        return None
     try:
         return dynamodb.Table(_table_name(table_name))
     except Exception as error:
@@ -75,6 +82,8 @@ def get_item(table_name: str, key: dict):
 
 
 def describe_table(table_name: str):
+    if not service_available("dynamodb_client") or dynamodb_client is None:
+        return None
     try:
         response = dynamodb_client.describe_table(TableName=_table_name(table_name))
         return to_json_compatible(response["Table"])
@@ -98,29 +107,42 @@ def _query_index(table, attribute_name: str, value: str, index_name: str):
     return response.get("Items", [])
 
 
+def _query_candidates(table, attribute_name: str, values: list[str], index_name: str):
+    results = []
+    seen = set()
+    for value in values:
+        if not value or value in seen:
+            continue
+        seen.add(value)
+        results.extend(_query_index(table, attribute_name, value, index_name))
+    return results
+
+
 def query_registry(entity_name: str = None, domain: str = None):
     table = get_table("InstitutionalRegistry")
-    normalized_domain = (domain or "").strip().lower()
-    normalized_entity = (entity_name or "").strip().lower()
+    original_domain = (domain or "").strip()
+    normalized_domain = original_domain.lower()
+    original_entity = (entity_name or "").strip()
+    normalized_entity = original_entity.lower()
 
     if table:
         try:
             results = []
             if normalized_domain:
                 results.extend(
-                    _query_index(
+                    _query_candidates(
                         table,
                         Config.REGISTRY_DOMAIN_ATTRIBUTE,
-                        normalized_domain,
+                        [original_domain, normalized_domain],
                         Config.REGISTRY_DOMAIN_INDEX_NAME,
                     )
                 )
             if normalized_entity:
                 results.extend(
-                    _query_index(
+                    _query_candidates(
                         table,
                         Config.REGISTRY_ENTITY_ATTRIBUTE,
-                        normalized_entity,
+                        [original_entity, normalized_entity],
                         Config.REGISTRY_ENTITY_INDEX_NAME,
                     )
                 )
@@ -141,7 +163,7 @@ def query_registry(entity_name: str = None, domain: str = None):
                 "error": str(error),
             }))
 
-    if Config.ALLOW_MOCK_FALLBACK:
+    if Config.ALLOW_MOCK_FALLBACK or is_mock_mode():
         mock_result = mock_registry_lookup(normalized_domain, entity_name or normalized_entity)
         return [mock_result] if mock_result else []
     return []

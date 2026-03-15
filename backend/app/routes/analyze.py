@@ -1,6 +1,5 @@
 from flask import Blueprint, request, jsonify
-from pydantic import ValidationError
-from app.models.analysis_model import AnalysisRequest
+from app.models.analysis_model import AnalysisRequest, ValidationError
 from app.services.analysis_service import analyze_communication
 from app.aws.dynamodb_client import get_item
 from app.security.rate_limit import limiter

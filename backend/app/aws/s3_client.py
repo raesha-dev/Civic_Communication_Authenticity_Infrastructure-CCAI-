@@ -1,7 +1,7 @@
 import json
 import logging
 import os
-from app.aws.session import s3_client
+from app.aws.session import is_mock_mode, s3_client, service_available
 
 
 logger = logging.getLogger(__name__)
@@ -19,6 +19,15 @@ def _write_local(key: str, data: str):
 
 
 def upload_to_s3(bucket: str, key: str, data: str):
+    if is_mock_mode() or not service_available("s3") or s3_client is None:
+        logger.warning(json.dumps({
+            "event": "s3_mock_fallback",
+            "bucket": bucket,
+            "key": key,
+            "reason": "service_unavailable",
+        }))
+        _write_local(key, data)
+        return True
     try:
         s3_client.put_object(
             Bucket=bucket,
@@ -39,6 +48,12 @@ def upload_to_s3(bucket: str, key: str, data: str):
 
 
 def download_from_s3(bucket: str, key: str):
+    if is_mock_mode() or not service_available("s3") or s3_client is None:
+        local_path = _local_cache_path(key)
+        if os.path.exists(local_path):
+            with open(local_path, "r", encoding="utf-8") as file_obj:
+                return file_obj.read()
+        return None
     try:
         response = s3_client.get_object(Bucket=bucket, Key=key)
         return response["Body"].read().decode("utf-8")

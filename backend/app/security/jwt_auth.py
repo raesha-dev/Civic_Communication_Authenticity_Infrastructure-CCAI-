@@ -2,9 +2,17 @@ from functools import wraps
 from flask import request, jsonify
 from app.config import Config
 
+
 def require_api_key(f):
     @wraps(f)
     def decorated(*args, **kwargs):
+        if not Config.JWT_SECRET and not Config.MOCK_MODE:
+            return jsonify({
+                "error": {
+                    "code": "SERVICE_MISCONFIGURED",
+                    "message": "API authentication secret is not configured."
+                }
+            }), 503
         api_key = request.headers.get("X-API-Key")
         if api_key != Config.JWT_SECRET and not Config.MOCK_MODE:
             # Simplified for MVP hackathon scope. Real implementation would use flask_jwt_extended

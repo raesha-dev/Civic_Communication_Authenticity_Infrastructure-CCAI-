@@ -1,4 +1,4 @@
-const API_URL = (process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000").replace(/\/$/, "");
+const API_URL = (process.env.NEXT_PUBLIC_API_URL || "/api").replace(/\/$/, "");
 
 type ApiErrorShape = {
   error?: {
@@ -117,31 +117,46 @@ export type HealthResponse = {
 
 class ApiError extends Error {
   code?: string;
+  status?: number;
 
-  constructor(message: string, code?: string) {
+  constructor(message: string, code?: string, status?: number) {
     super(message);
     this.code = code;
+    this.status = status;
   }
 }
 
 async function request<T>(path: string, init?: RequestInit): Promise<T> {
+  const method = init?.method || "GET";
+  const hasBody = init?.body !== undefined && init?.body !== null;
+  const headers = new Headers(init?.headers || {});
+
+  if (hasBody && !headers.has("Content-Type")) {
+    headers.set("Content-Type", "application/json");
+  }
+
   const response = await fetch(`${API_URL}${path}`, {
     cache: "no-store",
     ...init,
-    headers: {
-      "Content-Type": "application/json",
-      ...(init?.headers || {}),
-    },
+    method,
+    headers,
   });
 
   const raw = await response.text();
-  const data = raw ? (JSON.parse(raw) as T & ApiErrorShape) : ({} as T & ApiErrorShape);
+  let data = {} as T & ApiErrorShape;
+  if (raw) {
+    try {
+      data = JSON.parse(raw) as T & ApiErrorShape;
+    } catch {
+      data = { error: { message: raw } } as T & ApiErrorShape;
+    }
+  }
 
   if (!response.ok) {
     const message = Array.isArray(data.error?.message)
       ? data.error?.message.join(", ")
-      : data.error?.message || "API request failed";
-    throw new ApiError(message, data.error?.code);
+      : data.error?.message || `API request failed with status ${response.status}`;
+    throw new ApiError(message, data.error?.code, response.status);
   }
 
   return data;
