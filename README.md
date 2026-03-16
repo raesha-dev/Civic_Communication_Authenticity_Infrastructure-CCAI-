@@ -151,10 +151,6 @@ Provides multilingual explanations and scheme information.
 
 ## Demo
 
-Demo video:
-
-[Insert Demo Link]
-
 The demo demonstrates:
 
 - communication authenticity verification
