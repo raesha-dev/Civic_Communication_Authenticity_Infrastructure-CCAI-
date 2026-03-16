@@ -1,4 +1,4 @@
-# Civic Communication Authenticity Infrastructure (CCAI)
+# Civic Communication Authenticity Infrastructure (CCAI) 
 
 CCAI is an explainable AI system designed to help citizens verify the authenticity of institutional communications and discover legitimate government schemes they may be eligible for.
 
