@@ -211,19 +211,32 @@ terraform apply
 
 ## Dataset
 
-This project uses a structured dataset of government schemes derived from publicly available official sources such as:
+This project uses a structured dataset of government schemes derived from publicly available official sources.
 
+Primary sources include:
+
+- https://data.gov.in  
 - https://scholarships.gov.in  
 - https://www.india.gov.in  
-- https://pmkisan.gov.in  
+- https://vikaspedia.in  
+- https://www.mygov.in  
+
+Additional references:
+
+- https://data.worldbank.org  
+- https://www.kaggle.com  
 
 The dataset is stored in:
 
 datasets/sample_schemes.json
 
-It is used for eligibility matching and scheme discovery.
+It is used for:
 
-Note: The dataset is a structured sample derived from publicly available government sources for demonstration purposes. The system is designed to scale with larger official datasets.
+- eligibility-based scheme discovery  
+- linking users to official government sources  
+- demonstrating real-world applicability  
+
+Note: This dataset is a structured sample derived from public sources for demonstration purposes. The system is designed to scale with larger official datasets.
 
 ---
 
