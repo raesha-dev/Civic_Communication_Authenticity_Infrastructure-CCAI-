@@ -1,0 +1,162 @@
+[
+  {
+    "scheme_name": "National Scholarship Portal",
+    "income_range": "low",
+    "occupation": "student",
+    "location": "india",
+    "description": "Scholarships for students across India",
+    "official_source": "https://scholarships.gov.in"
+  },
+  {
+    "scheme_name": "PM Kisan Samman Nidhi",
+    "income_range": "low",
+    "occupation": "farmer",
+    "location": "india",
+    "description": "Income support for small and marginal farmers",
+    "official_source": "https://pmkisan.gov.in"
+  },
+  {
+    "scheme_name": "Ayushman Bharat (PM-JAY)",
+    "income_range": "low",
+    "occupation": "all",
+    "location": "india",
+    "description": "Health insurance scheme for low-income families",
+    "official_source": "https://pmjay.gov.in"
+  },
+  {
+    "scheme_name": "MGNREGA",
+    "income_range": "low",
+    "occupation": "rural_worker",
+    "location": "india",
+    "description": "Employment guarantee scheme for rural households",
+    "official_source": "https://nrega.nic.in"
+  },
+  {
+    "scheme_name": "Skill India Mission",
+    "income_range": "all",
+    "occupation": "youth",
+    "location": "india",
+    "description": "Skill development and training programs",
+    "official_source": "https://www.skillindia.gov.in"
+  },
+  {
+    "scheme_name": "PM Awas Yojana",
+    "income_range": "low",
+    "occupation": "all",
+    "location": "india",
+    "description": "Affordable housing scheme for low-income groups",
+    "official_source": "https://pmaymis.gov.in"
+  },
+  {
+    "scheme_name": "Startup India",
+    "income_range": "all",
+    "occupation": "entrepreneur",
+    "location": "india",
+    "description": "Support for startups and entrepreneurs",
+    "official_source": "https://www.startupindia.gov.in"
+  },
+  {
+    "scheme_name": "Stand Up India",
+    "income_range": "all",
+    "occupation": "entrepreneur",
+    "location": "india",
+    "description": "Bank loans for SC/ST and women entrepreneurs",
+    "official_source": "https://www.standupmitra.in"
+  },
+  {
+    "scheme_name": "Digital India",
+    "income_range": "all",
+    "occupation": "all",
+    "location": "india",
+    "description": "Digital infrastructure and services initiative",
+    "official_source": "https://digitalindia.gov.in"
+  },
+  {
+    "scheme_name": "PM Ujjwala Yojana",
+    "income_range": "low",
+    "occupation": "household",
+    "location": "india",
+    "description": "Free LPG connections for low-income households",
+    "official_source": "https://www.pmuy.gov.in"
+  },
+  {
+    "scheme_name": "Atal Pension Yojana",
+    "income_range": "low",
+    "occupation": "worker",
+    "location": "india",
+    "description": "Pension scheme for unorganized sector workers",
+    "official_source": "https://www.npscra.nsdl.co.in"
+  },
+  {
+    "scheme_name": "PM Jan Dhan Yojana",
+    "income_range": "low",
+    "occupation": "all",
+    "location": "india",
+    "description": "Financial inclusion through bank accounts",
+    "official_source": "https://pmjdy.gov.in"
+  },
+  {
+    "scheme_name": "Beti Bachao Beti Padhao",
+    "income_range": "all",
+    "occupation": "family",
+    "location": "india",
+    "description": "Support for girl child education and welfare",
+    "official_source": "https://wcd.nic.in"
+  },
+  {
+    "scheme_name": "PM Mudra Yojana",
+    "income_range": "low",
+    "occupation": "small_business",
+    "location": "india",
+    "description": "Loans for micro and small enterprises",
+    "official_source": "https://www.mudra.org.in"
+  },
+  {
+    "scheme_name": "National Social Assistance Programme",
+    "income_range": "low",
+    "occupation": "elderly",
+    "location": "india",
+    "description": "Pension schemes for elderly and vulnerable groups",
+    "official_source": "https://nsap.nic.in"
+  },
+  {
+    "scheme_name": "Pradhan Mantri Fasal Bima Yojana",
+    "income_range": "low",
+    "occupation": "farmer",
+    "location": "india",
+    "description": "Crop insurance scheme for farmers",
+    "official_source": "https://pmfby.gov.in"
+  },
+  {
+    "scheme_name": "eShram Portal",
+    "income_range": "low",
+    "occupation": "worker",
+    "location": "india",
+    "description": "Database for unorganized sector workers",
+    "official_source": "https://eshram.gov.in"
+  },
+  {
+    "scheme_name": "National Health Mission",
+    "income_range": "low",
+    "occupation": "all",
+    "location": "india",
+    "description": "Public healthcare services improvement program",
+    "official_source": "https://nhm.gov.in"
+  },
+  {
+    "scheme_name": "PM Garib Kalyan Yojana",
+    "income_range": "low",
+    "occupation": "all",
+    "location": "india",
+    "description": "Relief measures for economically weaker sections",
+    "official_source": "https://www.india.gov.in"
+  },
+  {
+    "scheme_name": "National Rural Livelihood Mission",
+    "income_range": "low",
+    "occupation": "rural",
+    "location": "india",
+    "description": "Self-employment and organization of rural poor",
+    "official_source": "https://aajeevika.gov.in"
+  }
+]
