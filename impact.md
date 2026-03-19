@@ -1,73 +1,58 @@
 # Civic Impact
 
-## The Problem
+## Problem Context
 
-In India, a large number of citizens receive information about government schemes through SMS, messaging apps, and forwarded links. Many of these messages claim to offer scholarships, financial benefits, or public services. However, people often struggle to determine whether these communications are genuine, outdated, or misleading.
+In India, access to government scheme information is often mediated through informal digital channels such as SMS and messaging platforms. These channels frequently contain forwarded messages that are difficult to verify, leading to the spread of misleading or unauthenticated information. At the same time, awareness of legitimate public welfare schemes remains limited, particularly among populations that rely on informal information networks.
 
-At the same time, many citizens remain unaware of legitimate government schemes they are eligible for. Information about these programs is fragmented, difficult to interpret, or inaccessible due to language barriers. This creates a gap where misinformation spreads easily, while authentic opportunities remain underutilized.
-
----
-
-## What CCAI Does
-
-The Civic Communication Authenticity Infrastructure (CCAI) addresses this gap by providing a system that helps citizens:
-
-* Verify the authenticity of institutional communications
-* Understand why a message may be trustworthy or suspicious
-* Discover government schemes they are eligible for
-* Access official sources directly
-* View information in their preferred language
-
-The system does not censor or block content. Instead, it provides **explainable signals** that help users make informed decisions.
+This creates a dual challenge: citizens struggle to distinguish authentic institutional communication from misleading content, while also lacking clear pathways to discover programs they are eligible for.
 
 ---
 
-## Why This Matters
+## Contribution
 
-Access to accurate public information is essential for meaningful participation in a democracy. When citizens cannot trust the information they receive, it affects:
+The Civic Communication Authenticity Infrastructure (CCAI) addresses this gap by introducing a system that combines:
 
-* participation in public programs
-* access to welfare benefits
-* trust in institutions
-* vulnerability to fraud and misinformation
+* explainable authenticity assessment of institutional communications
+* eligibility-based discovery of government schemes
+* multilingual access to public information
+* privacy-preserving processing of user inputs
 
-CCAI helps reduce this gap by making authenticity and eligibility information more transparent and accessible.
-
----
-
-## Who Benefits
-
-The system is designed for:
-
-* students seeking scholarships
-* low-income and rural communities
-* first-time applicants of government programs
-* citizens relying on forwarded messages for information
-* journalists and civic organizations verifying public communications
-
-By simplifying access to reliable information, CCAI supports more informed decision-making.
+Rather than enforcing content restrictions, CCAI provides structured signals that enable users to independently evaluate information credibility.
 
 ---
 
-## Privacy and Safety
+## Democratic Relevance
 
-CCAI is built with a privacy-first approach:
+Access to trustworthy information is foundational to democratic participation. When citizens are unable to verify communications or identify relevant public programs, it limits their ability to engage with institutional processes and access available benefits.
 
-* No personal data is stored during eligibility checks
-* User inputs are processed anonymously
-* Personally identifiable information is redacted before analysis
+CCAI contributes to:
 
-This ensures that users can safely verify communications without exposing sensitive information.
+* improved transparency in public communication
+* increased accessibility of welfare programs
+* reduced reliance on unverified information channels
+* strengthened trust in institutional sources
 
 ---
 
-## Long-Term Vision
+## Privacy-Centered Design
 
-CCAI aims to evolve into a **public civic infrastructure layer** that:
+The system is designed to minimize data exposure:
 
-* strengthens trust in digital public communication
-* improves access to government programs
-* supports multilingual information access
-* enables collaboration with civic organizations and researchers
+* user-provided eligibility signals are processed anonymously
+* no personal data is stored
+* sensitive information is redacted prior to analysis
 
-By helping citizens identify trustworthy information and relevant public benefits, CCAI contributes to building a more transparent and accessible information ecosystem.
+This ensures that users can interact with the system without compromising privacy.
+
+---
+
+## Long-Term Impact
+
+CCAI is designed as a foundation for a broader civic information infrastructure that can support:
+
+* large-scale verification of public communications
+* improved discovery of government programs
+* multilingual access to institutional information
+* collaboration with civic organizations and researchers
+
+By bridging gaps in information access and trust, the system supports a more informed and participatory public.
