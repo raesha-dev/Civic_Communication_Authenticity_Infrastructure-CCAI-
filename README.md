@@ -223,6 +223,8 @@ datasets/sample_schemes.json
 
 It is used for eligibility matching and scheme discovery.
 
+Note: The dataset is a structured sample derived from publicly available government sources for demonstration purposes. The system is designed to scale with larger official datasets.
+
 ---
 
 ## Project Vision
