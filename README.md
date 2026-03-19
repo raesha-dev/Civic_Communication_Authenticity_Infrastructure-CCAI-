@@ -209,6 +209,22 @@ terraform apply
 
 ---
 
+## Dataset
+
+This project uses a structured dataset of government schemes derived from publicly available official sources such as:
+
+- https://scholarships.gov.in  
+- https://www.india.gov.in  
+- https://pmkisan.gov.in  
+
+The dataset is stored in:
+
+datasets/sample_schemes.json
+
+It is used for eligibility matching and scheme discovery.
+
+---
+
 ## Project Vision
 
 CCAI aims to become a public civic infrastructure for trustworthy digital communication.
